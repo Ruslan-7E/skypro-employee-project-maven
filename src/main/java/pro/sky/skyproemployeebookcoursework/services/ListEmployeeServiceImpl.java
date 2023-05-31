@@ -8,6 +8,8 @@ import pro.sky.skyproemployeebookcoursework.exceptions.EmployeeNotFoundException
 import pro.sky.skyproemployeebookcoursework.exceptions.EmployeeStorageIsFullException;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -40,10 +42,23 @@ public class ListEmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee findEmployee(String firstName, String lastName) {
-        int index = staff.indexOf(new Employee(firstName, lastName));
-        if (index == -1) {
+
+//        int index = staff.indexOf(new Employee(firstName, lastName));
+//        if (index == -1) {
+//            throw new EmployeeNotFoundException();
+//        }
+//        return staff.get(index);
+
+        Employee employee = new Employee(firstName, lastName);
+        if (staff.contains(employee)) {
+            return employee;
+        } else {
             throw new EmployeeNotFoundException();
         }
-        return staff.get(index);
+    }
+
+    @Override
+    public Collection<Employee> findAll() {
+        return Collections.unmodifiableList(staff);
     }
 }

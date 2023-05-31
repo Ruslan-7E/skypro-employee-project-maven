@@ -6,6 +6,7 @@ import pro.sky.skyproemployeebookcoursework.exceptions.EmployeeAlreadyAddedExcep
 import pro.sky.skyproemployeebookcoursework.exceptions.EmployeeNotFoundException;
 import pro.sky.skyproemployeebookcoursework.exceptions.EmployeeStorageIsFullException;
 
+import java.util.Collection;
 import java.util.Objects;
 
 @Service
@@ -55,5 +56,10 @@ public class ArrayEmployeeServiceImpl implements EmployeeService{
             if (Objects.equals(emp, temp)) return emp;
         }
         throw new EmployeeNotFoundException();
+    }
+
+    @Override
+    public Collection<Employee> findAll() {
+        return null;
     }
 }

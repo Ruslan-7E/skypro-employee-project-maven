@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RestController;
 import pro.sky.skyproemployeebookcoursework.domain.Employee;
 import pro.sky.skyproemployeebookcoursework.services.EmployeeService;
 
+import java.util.Collection;
+
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
@@ -17,10 +19,10 @@ public class EmployeeController {
         this.service = service;
     }
 
-    @GetMapping
-    public String welcome() {
-        return "Welcome to HR App";
-    }
+//    @GetMapping
+//    public String welcome() {
+//        return "Welcome to HR App";
+//    }
 
     @GetMapping("/add")
     public Employee addEmployee(
@@ -41,5 +43,10 @@ public class EmployeeController {
             @RequestParam("firstName") String firstName,
             @RequestParam("lastName") String lastName) {
         return service.removeEmployee(firstName, lastName);
+    }
+
+    @GetMapping
+    public Collection<Employee> findAll() {
+        return service.findAll();
     }
 }
