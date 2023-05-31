@@ -7,16 +7,17 @@ import pro.sky.skyproemployeebookcoursework.exceptions.EmployeeAlreadyAddedExcep
 import pro.sky.skyproemployeebookcoursework.exceptions.EmployeeNotFoundException;
 import pro.sky.skyproemployeebookcoursework.exceptions.EmployeeStorageIsFullException;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Service
 @Primary
 public class ListEmployeeServiceImpl implements EmployeeService {
     private static final int CAPASITY = 10;
-    List<Employee> staff = new ArrayList<>();
+    private final Map<String, Employee> staff;
+
+    public ListEmployeeServiceImpl() {
+        this.staff = new HashMap<>();
+    }
 
     @Override
     public Employee addEmployee(String firstName, String lastName) {
@@ -24,20 +25,26 @@ public class ListEmployeeServiceImpl implements EmployeeService {
         if (staff.size() >= CAPASITY) {
             throw new EmployeeStorageIsFullException();
         }
-        if (staff.contains(temp)) {
+        if (staff.containsKey(temp.getFullName())) {
             throw new EmployeeAlreadyAddedException();
         }
-        staff.add(temp);
+        staff.put(temp.getFullName(), temp);
         return temp;
     }
 
     @Override
     public Employee removeEmployee(String firstName, String lastName) {
-        int index = staff.indexOf(new Employee(firstName, lastName));
-        if (index == -1) {
-            throw new EmployeeNotFoundException();
+
+//        int index = staff.indexOf(new Employee(firstName, lastName));
+//        if (index == -1) {
+//            throw new EmployeeNotFoundException();
+//        }
+//        return staff.remove(index);
+        Employee employee = new Employee(firstName, lastName);
+        if (staff.containsKey(employee.getFullName())) {
+            return staff.remove(employee.getFullName());
         }
-        return staff.remove(index);
+        throw new EmployeeNotFoundException();
     }
 
     @Override
@@ -50,15 +57,15 @@ public class ListEmployeeServiceImpl implements EmployeeService {
 //        return staff.get(index);
 
         Employee employee = new Employee(firstName, lastName);
-        if (staff.contains(employee)) {
-            return employee;
-        } else {
-            throw new EmployeeNotFoundException();
+        if (staff.containsKey(employee.getFullName())) {
+            return staff.get(employee.getFullName());
         }
+
+        throw new EmployeeNotFoundException();
     }
 
     @Override
     public Collection<Employee> findAll() {
-        return Collections.unmodifiableList(staff);
+        return Collections.unmodifiableCollection(staff.values());
     }
 }
