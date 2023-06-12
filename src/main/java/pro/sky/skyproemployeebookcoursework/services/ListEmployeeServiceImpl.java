@@ -21,7 +21,22 @@ public class ListEmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee addEmployee(String firstName, String lastName) {
-        Employee temp = new Employee(firstName, lastName);
+        return null;
+    }
+
+    @Override
+    public Employee removeEmployee(String firstName, String lastName) {
+        return null;
+    }
+
+    @Override
+    public Employee findEmployee(String firstName, String lastName) {
+        return null;
+    }
+
+    @Override
+    public Employee addEmployee(String firstName, String lastName, double salary, int departmentId) {
+        Employee temp = new Employee(firstName, lastName, salary, departmentId);
         if (staff.size() >= CAPASITY) {
             throw new EmployeeStorageIsFullException();
         }
@@ -33,14 +48,14 @@ public class ListEmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee removeEmployee(String firstName, String lastName) {
+    public Employee removeEmployee(String firstName, String lastName, double salary, int departmentId) {
 
 //        int index = staff.indexOf(new Employee(firstName, lastName));
 //        if (index == -1) {
 //            throw new EmployeeNotFoundException();
 //        }
 //        return staff.remove(index);
-        Employee employee = new Employee(firstName, lastName);
+        Employee employee = new Employee(firstName, lastName, salary, departmentId);
         if (staff.containsKey(employee.getFullName())) {
             return staff.remove(employee.getFullName());
         }
@@ -48,7 +63,7 @@ public class ListEmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee findEmployee(String firstName, String lastName) {
+    public Employee findEmployee(String firstName, String lastName, double salary, int departmentId) {
 
 //        int index = staff.indexOf(new Employee(firstName, lastName));
 //        if (index == -1) {
@@ -56,7 +71,7 @@ public class ListEmployeeServiceImpl implements EmployeeService {
 //        }
 //        return staff.get(index);
 
-        Employee employee = new Employee(firstName, lastName);
+        Employee employee = new Employee(firstName, lastName, salary, departmentId);
         if (staff.containsKey(employee.getFullName())) {
             return staff.get(employee.getFullName());
         }

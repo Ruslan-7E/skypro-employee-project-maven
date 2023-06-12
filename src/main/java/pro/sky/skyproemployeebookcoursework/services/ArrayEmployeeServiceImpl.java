@@ -19,7 +19,7 @@ public class ArrayEmployeeServiceImpl implements EmployeeService{
         if (currentSize >= CAPACITY) {
             throw new EmployeeStorageIsFullException();
         }
-        Employee temp = new Employee(firstName, lastName);
+        Employee temp = new Employee(firstName, lastName, salary, departmentId);
         for (Employee emp : staff) {
             if (Objects.equals(emp, temp)) {
                 throw new EmployeeAlreadyAddedException();
@@ -32,7 +32,7 @@ public class ArrayEmployeeServiceImpl implements EmployeeService{
 
     @Override
     public Employee removeEmployee(String firstName, String lastName) {
-        Employee temp = new Employee(firstName, lastName);
+        Employee temp = new Employee(firstName, lastName, salary, departmentId);
         int i;
         for (i = 0; i < currentSize; ++i) {
             if (staff[i].equals(temp)) break;
@@ -51,7 +51,7 @@ public class ArrayEmployeeServiceImpl implements EmployeeService{
 
     @Override
     public Employee findEmployee(String firstName, String lastName) {
-        Employee temp = new Employee(firstName, lastName);
+        Employee temp = new Employee(firstName, lastName, salary, departmentId);
         for (var emp : staff) {
             if (Objects.equals(emp, temp)) return emp;
         }

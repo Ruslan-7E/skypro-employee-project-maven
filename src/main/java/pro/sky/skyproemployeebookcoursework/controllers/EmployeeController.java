@@ -19,10 +19,10 @@ public class EmployeeController {
         this.service = service;
     }
 
-//    @GetMapping
-//    public String welcome() {
-//        return "Welcome to HR App";
-//    }
+    @GetMapping("/departments")
+    public String welcome() {
+        return "Welcome to Departments";
+    }
 
     @GetMapping("/add")
     public Employee addEmployee(
