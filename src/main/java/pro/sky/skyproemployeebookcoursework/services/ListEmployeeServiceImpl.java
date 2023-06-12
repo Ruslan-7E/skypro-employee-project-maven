@@ -20,21 +20,6 @@ public class ListEmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee addEmployee(String firstName, String lastName) {
-        return null;
-    }
-
-    @Override
-    public Employee removeEmployee(String firstName, String lastName) {
-        return null;
-    }
-
-    @Override
-    public Employee findEmployee(String firstName, String lastName) {
-        return null;
-    }
-
-    @Override
     public Employee addEmployee(String firstName, String lastName, double salary, int departmentId) {
         Employee temp = new Employee(firstName, lastName, salary, departmentId);
         if (staff.size() >= CAPASITY) {

@@ -15,7 +15,7 @@ public class ArrayEmployeeServiceImpl implements EmployeeService{
     private Employee[] staff = new Employee[CAPACITY];
     private int currentSize = 0;
     @Override
-    public Employee addEmployee(String firstName, String lastName) {
+    public Employee addEmployee(String firstName, String lastName, double salary, int departmentId) {
         if (currentSize >= CAPACITY) {
             throw new EmployeeStorageIsFullException();
         }
@@ -31,7 +31,7 @@ public class ArrayEmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
-    public Employee removeEmployee(String firstName, String lastName) {
+    public Employee removeEmployee(String firstName, String lastName, double salary, int departmentId) {
         Employee temp = new Employee(firstName, lastName, salary, departmentId);
         int i;
         for (i = 0; i < currentSize; ++i) {
@@ -50,7 +50,7 @@ public class ArrayEmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
-    public Employee findEmployee(String firstName, String lastName) {
+    public Employee findEmployee(String firstName, String lastName, double salary, int departmentId) {
         Employee temp = new Employee(firstName, lastName, salary, departmentId);
         for (var emp : staff) {
             if (Objects.equals(emp, temp)) return emp;
