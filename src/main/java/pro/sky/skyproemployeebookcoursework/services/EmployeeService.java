@@ -3,6 +3,7 @@ package pro.sky.skyproemployeebookcoursework.services;
 import pro.sky.skyproemployeebookcoursework.domain.Employee;
 
 import java.util.Collection;
+import java.util.List;
 
 public interface EmployeeService {
 
@@ -13,4 +14,14 @@ public interface EmployeeService {
     Employee findEmployee(String firstName, String lastName, double salary, int departmentId);
 
     Collection<Employee> findAll();
+
+    Employee getMaxPaidByDepart(int departmentId);
+
+    Employee getMinPaidByDepart(int departmentId);
+
+    List<Employee> showAll();
+
+    List<Employee> showByDepart(int department);
+
+
 }

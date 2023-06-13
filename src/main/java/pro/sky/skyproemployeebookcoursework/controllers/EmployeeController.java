@@ -8,6 +8,7 @@ import pro.sky.skyproemployeebookcoursework.domain.Employee;
 import pro.sky.skyproemployeebookcoursework.services.EmployeeService;
 
 import java.util.Collection;
+import java.util.List;
 
 @RestController
 @RequestMapping("/employee")
@@ -54,5 +55,23 @@ public class EmployeeController {
     @GetMapping
     public Collection<Employee> findAll() {
         return service.findAll();
+    }
+
+    @GetMapping("/departments/max-salary")
+    public Employee getMaxPaidByDepart(@RequestParam("departmentid") int departmentId) {
+        return service.getMaxPaidByDepart(departmentId);
+    }
+
+    @GetMapping("/departments/min-salary")
+    public Employee getMinPaidByDepart(@RequestParam("departmentid") int departmentId) {
+        return service.getMinPaidByDepart(departmentId);
+    }
+
+    @GetMapping("/departments/all")
+    public List<Employee> getEmployeeByDepart(@RequestParam(value = "departmentid", required = false) Integer departmentId) {
+        if (departmentId == null) {
+            return service.showAll();
+        }
+        return service.showByDepart(departmentId);
     }
 }
