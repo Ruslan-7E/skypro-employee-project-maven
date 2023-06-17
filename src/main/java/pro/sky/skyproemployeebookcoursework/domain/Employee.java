@@ -3,20 +3,26 @@ package pro.sky.skyproemployeebookcoursework.domain;
 import java.util.Objects;
 
 public class Employee {
-    private final String firstName;
-    private final String lastName;
+    private final String fullName;
+    private final double salary;
+    private final int departmentId;
 
-    public Employee(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Employee(String fullName, double salary, int departmentId) {
+        this.fullName = fullName;
+        this.salary = salary;
+        this.departmentId = departmentId;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFullName() {
+        return fullName;
     }
 
-    public String getLastName() {
-        return lastName;
+    public double getSalary() {
+        return salary;
+    }
+
+    public int getDepartmentId() {
+        return departmentId;
     }
 
     @Override
@@ -24,18 +30,21 @@ public class Employee {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName);
+        return Double.compare(employee.salary, salary) == 0
+                && departmentId == employee.departmentId
+                && Objects.equals(fullName, employee.fullName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName);
+        return Objects.hash(fullName, salary, departmentId);
     }
 
     @Override
     public String toString() {
-        return "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+        return "fullName='" + fullName + '\'' +
+                ", salary='" + salary + '\'' +
+                ", departmentId'" + departmentId + '\'' +
                 '}';
     }
 

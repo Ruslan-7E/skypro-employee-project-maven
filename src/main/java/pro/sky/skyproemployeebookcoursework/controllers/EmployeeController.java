@@ -8,6 +8,8 @@ import pro.sky.skyproemployeebookcoursework.domain.Employee;
 import pro.sky.skyproemployeebookcoursework.services.EmployeeService;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/employee")
@@ -19,34 +21,57 @@ public class EmployeeController {
         this.service = service;
     }
 
-//    @GetMapping
-//    public String welcome() {
-//        return "Welcome to HR App";
+    @GetMapping("/departments")
+    public String welcome() {
+        return "Welcome to Departments";
+    }
+
+//    @GetMapping("/add")
+//    public Employee addEmployee(
+//            @RequestParam("firstName") String firstName,
+//            @RequestParam("lastName") String lastName,
+//            @RequestParam("salary") double salary,
+//            @RequestParam("department") int departmentId) {
+//        return service.addEmployee(firstName, lastName, salary, departmentId);
 //    }
 
-    @GetMapping("/add")
-    public Employee addEmployee(
-            @RequestParam("firstName") String firstName,
-            @RequestParam("lastName") String lastName) {
-        return service.addEmployee(firstName, lastName);
+//    @GetMapping("/find")
+//    public Employee findEmployee(
+//            @RequestParam("firstName") String firstName,
+//            @RequestParam("lastName") String lastName,
+//            @RequestParam("salary") double salary,
+//            @RequestParam("department") int departmentId) {
+//        return service.findEmployee(firstName, lastName, salary, departmentId);
+//    }
+
+//    @GetMapping("/remove")
+//    public Employee removeEmployee(
+//            @RequestParam("firstName") String firstName,
+//            @RequestParam("lastName") String lastName,
+//            @RequestParam("salary") double salary,
+//            @RequestParam("department") int departmentId) {
+//        return service.removeEmployee(firstName, lastName, salary, departmentId);
+//    }
+
+//    @GetMapping
+//    public Collection<Employee> findAll() {
+//        return service.findAll();
+//    }
+
+    @GetMapping("/departments/max-salary")
+    public Employee getMaxPaidByDepart(@RequestParam("departmentid") int departmentId) {
+        return service.getMaxPaidByDepart(departmentId);
     }
 
-    @GetMapping("/find")
-    public Employee findEmployee(
-            @RequestParam("firstName") String firstName,
-            @RequestParam("lastName") String lastName) {
-        return service.findEmployee(firstName, lastName);
+    @GetMapping("/departments/min-salary")
+    public Employee getMinPaidByDepart(@RequestParam("departmentid") int departmentId) {
+        return service.getMinPaidByDepart(departmentId);
     }
 
-    @GetMapping("/remove")
-    public Employee removeEmployee(
-            @RequestParam("firstName") String firstName,
-            @RequestParam("lastName") String lastName) {
-        return service.removeEmployee(firstName, lastName);
-    }
-
-    @GetMapping
-    public Collection<Employee> findAll() {
-        return service.findAll();
+    @GetMapping("/departments/all")
+    public Map<Integer, List<Employee>> getAllEmployeeByDepart(
+            @RequestParam(value = "departmentid", required = false) Integer departmentId)
+    {
+        return service.showAll();
     }
 }
