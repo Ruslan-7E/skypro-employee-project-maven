@@ -1,7 +1,9 @@
 package pro.sky.skyproemployeebookcoursework.services;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import pro.sky.skyproemployeebookcoursework.domain.Employee;
+import pro.sky.skyproemployeebookcoursework.exceptions.EmployeeAlreadyAddedException;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -20,6 +22,40 @@ public class MapEmployeeServiceImpl implements EmployeeService {
         staff.put("Peter Parker", new Employee("Peter", "Parker", 35.0, 1));
     }
 
+
+    @Override
+    public Employee addEmployee(String firstName, String lastName, double salary, int departmentId) {
+
+        if (!validateInput(firstName, lastName)) {
+            throw new IllegalArgumentException();
+        }
+
+        Employee employee = new Employee(firstName, lastName, salary, departmentId);
+        if (staff.containsKey(employee.getFullName())) {
+            throw new EmployeeAlreadyAddedException();
+        }
+        staff.put(employee.getFullName(), employee);
+        return employee;
+    }
+
+    @Override
+    public Employee removeEmployee(String firstName, String lastName, double salary, int departmentId) {
+        return null;
+    }
+
+    @Override
+    public Employee findEmployee(String firstName, String lastName, double salary, int departmentId) {
+        return null;
+    }
+
+    @Override
+    public Collection<Employee> findAll() {
+        return null;
+    }
+
+    private String getKey(String firstName, String lastName) {
+        return firstName + " " + lastName;
+    }
 
     @Override
     public Employee getMaxPaidByDepart(int departmentId) {
@@ -49,5 +85,9 @@ public class MapEmployeeServiceImpl implements EmployeeService {
         return staff.values().stream()
                 .filter(e -> e.getDepartmentId() == department)
                 .collect(Collectors.toList());
+    }
+
+    private boolean validateInput(String firstName, String lastName) {
+        return StringUtils.isAlpha(firstName) && StringUtils.isAlpha(lastName);
     }
 }
