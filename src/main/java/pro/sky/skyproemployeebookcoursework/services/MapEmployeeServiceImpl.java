@@ -12,12 +12,12 @@ public class MapEmployeeServiceImpl implements EmployeeService {
     private Map<String, Employee> staff = new HashMap<>();
 
     MapEmployeeServiceImpl() {
-        staff.put("John Snow", new Employee("John Snow",50.0, 1));
-        staff.put("Michael Jordan", new Employee("Michael Jordan",55.0, 2));
-        staff.put("James Gosling", new Employee("James Gosling",60.0, 3));
-        staff.put("Ruslan Expert", new Employee("Ruslan Expert",45.0, 3));
-        staff.put("Vasya Ryzhov", new Employee("Vasya Ryzhov",65.0, 2));
-        staff.put("Peter Parker", new Employee("Peter Parker",35.0, 1));
+        staff.put("John Snow", new Employee("John", "Snow", 50.0, 1));
+        staff.put("Michael Jordan", new Employee("Michael", "Jordan", 55.0, 2));
+        staff.put("James Gosling", new Employee("James", "Gosling", 60.0, 3));
+        staff.put("Ruslan Expert", new Employee("Ruslan", "Expert", 45.0, 3));
+        staff.put("Vasya Ryzhov", new Employee("Vasya", "Ryzhov", 65.0, 2));
+        staff.put("Peter Parker", new Employee("Peter", "Parker", 35.0, 1));
     }
 
 
