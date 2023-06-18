@@ -10,6 +10,8 @@ import pro.sky.skyproemployeebookcoursework.exceptions.InvalidInputException;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static org.apache.commons.lang3.StringUtils.isAlpha;
+
 @Service
 public class MapEmployeeServiceImpl implements EmployeeService {
     private static final int CAPASITY = 10;
@@ -102,7 +104,7 @@ public class MapEmployeeServiceImpl implements EmployeeService {
     }
 
     private void validateInput(String firstName, String lastName) {
-        if (!StringUtils.isAlpha(firstName) && !StringUtils.isAlpha(lastName)) {
+        if (!(isAlpha(firstName) && isAlpha(lastName))) {
             throw new InvalidInputException();
         }
     }
