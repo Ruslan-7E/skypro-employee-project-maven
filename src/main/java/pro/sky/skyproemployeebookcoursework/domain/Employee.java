@@ -23,6 +23,10 @@ public class Employee {
         return lastName;
     }
 
+    public String getFullName() {
+        return firstName + lastName;
+    }
+
     public double getSalary() {
         return salary;
     }
@@ -31,6 +35,21 @@ public class Employee {
         return departmentId;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return Double.compare(employee.salary, salary) == 0
+                && departmentId == employee.departmentId
+                && Objects.equals(firstName, employee.firstName)
+                && Objects.equals(lastName, employee.lastName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, salary, departmentId);
+    }
 
     @Override
     public String toString() {
