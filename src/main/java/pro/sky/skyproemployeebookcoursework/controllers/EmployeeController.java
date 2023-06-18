@@ -26,37 +26,35 @@ public class EmployeeController {
         return "Welcome to Departments";
     }
 
-//    @GetMapping("/add")
-//    public Employee addEmployee(
-//            @RequestParam("firstName") String firstName,
-//            @RequestParam("lastName") String lastName,
-//            @RequestParam("salary") double salary,
-//            @RequestParam("department") int departmentId) {
-//        return service.addEmployee(firstName, lastName, salary, departmentId);
-//    }
+    @GetMapping("/add")
+    public Employee addEmployee(
+            @RequestParam("firstName") String firstName,
+            @RequestParam("lastName") String lastName,
+            @RequestParam("salary") double salary,
+            @RequestParam("department") int departmentId) {
+        return service.addEmployee(firstName, lastName, salary, departmentId);
+    }
 
-//    @GetMapping("/find")
-//    public Employee findEmployee(
-//            @RequestParam("firstName") String firstName,
-//            @RequestParam("lastName") String lastName,
-//            @RequestParam("salary") double salary,
-//            @RequestParam("department") int departmentId) {
-//        return service.findEmployee(firstName, lastName, salary, departmentId);
-//    }
+    @GetMapping("/find")
+    public Employee findEmployee(
+            @RequestParam("firstName") String firstName,
+            @RequestParam("lastName") String lastName) {
+        return service.findEmployee(firstName, lastName);
+    }
 
-//    @GetMapping("/remove")
-//    public Employee removeEmployee(
-//            @RequestParam("firstName") String firstName,
-//            @RequestParam("lastName") String lastName,
-//            @RequestParam("salary") double salary,
-//            @RequestParam("department") int departmentId) {
-//        return service.removeEmployee(firstName, lastName, salary, departmentId);
-//    }
+    @GetMapping("/remove")
+    public Employee removeEmployee(
+            @RequestParam("firstName") String firstName,
+            @RequestParam("lastName") String lastName,
+            @RequestParam("salary") double salary,
+            @RequestParam("department") int departmentId) {
+        return service.removeEmployee(firstName, lastName, salary, departmentId);
+    }
 
-//    @GetMapping
-//    public Collection<Employee> findAll() {
-//        return service.findAll();
-//    }
+    @GetMapping
+    public Collection<Employee> findAll() {
+        return service.findAll();
+    }
 
     @GetMapping("/departments/max-salary")
     public Employee getMaxPaidByDepart(@RequestParam("departmentid") int departmentId) {

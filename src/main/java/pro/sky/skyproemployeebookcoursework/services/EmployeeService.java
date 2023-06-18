@@ -12,7 +12,7 @@ public interface EmployeeService {
 
     Employee removeEmployee(String firstName, String lastName, double salary, int departmentId);
 
-    Employee findEmployee(String firstName, String lastName, double salary, int departmentId);
+    Employee findEmployee(String firstName, String lastName);
 
     Collection<Employee> findAll();
 

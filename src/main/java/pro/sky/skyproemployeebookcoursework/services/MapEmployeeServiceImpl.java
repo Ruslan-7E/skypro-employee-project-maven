@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import pro.sky.skyproemployeebookcoursework.domain.Employee;
 import pro.sky.skyproemployeebookcoursework.exceptions.EmployeeAlreadyAddedException;
+import pro.sky.skyproemployeebookcoursework.exceptions.EmployeeNotFoundException;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -40,17 +41,35 @@ public class MapEmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee removeEmployee(String firstName, String lastName, double salary, int departmentId) {
-        return null;
+
+        if (!validateInput(firstName, lastName)) {
+            throw new IllegalArgumentException();
+        }
+
+        String key = getKey(firstName, lastName);
+        if (staff.containsKey(key)) {
+            return staff.remove(key);
+        }
+        throw new EmployeeNotFoundException();
     }
 
     @Override
-    public Employee findEmployee(String firstName, String lastName, double salary, int departmentId) {
-        return null;
+    public Employee findEmployee(String firstName, String lastName) {
+
+        if (!validateInput(firstName, lastName)) {
+            throw new IllegalArgumentException();
+        }
+
+        String key = getKey(firstName, lastName);
+        if (staff.containsKey(key)) {
+            return staff.get(key);
+        }
+        throw new EmployeeNotFoundException();
     }
 
     @Override
     public Collection<Employee> findAll() {
-        return null;
+        return Collections.unmodifiableCollection(staff.values());
     }
 
     private String getKey(String firstName, String lastName) {
