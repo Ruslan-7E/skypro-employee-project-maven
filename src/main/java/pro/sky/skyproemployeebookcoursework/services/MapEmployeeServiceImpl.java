@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import pro.sky.skyproemployeebookcoursework.domain.Employee;
 import pro.sky.skyproemployeebookcoursework.exceptions.EmployeeAlreadyAddedException;
 import pro.sky.skyproemployeebookcoursework.exceptions.EmployeeNotFoundException;
+import pro.sky.skyproemployeebookcoursework.exceptions.InvalidInputException;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -27,9 +28,7 @@ public class MapEmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee addEmployee(String firstName, String lastName, double salary, int departmentId) {
 
-        if (!validateInput(firstName, lastName)) {
-            throw new IllegalArgumentException();
-        }
+        validateInput(firstName, lastName);
 
         Employee employee = new Employee(firstName, lastName, salary, departmentId);
         if (staff.containsKey(employee.getFullName())) {
@@ -42,9 +41,7 @@ public class MapEmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee removeEmployee(String firstName, String lastName, double salary, int departmentId) {
 
-        if (!validateInput(firstName, lastName)) {
-            throw new IllegalArgumentException();
-        }
+        validateInput(firstName, lastName);
 
         String key = getKey(firstName, lastName);
         if (staff.containsKey(key)) {
@@ -56,9 +53,7 @@ public class MapEmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee findEmployee(String firstName, String lastName) {
 
-        if (!validateInput(firstName, lastName)) {
-            throw new IllegalArgumentException();
-        }
+        validateInput(firstName, lastName);
 
         String key = getKey(firstName, lastName);
         if (staff.containsKey(key)) {
@@ -81,7 +76,7 @@ public class MapEmployeeServiceImpl implements EmployeeService {
         return staff.values().stream()
                 .filter(e -> e.getDepartmentId() == departmentId)
                 .max(Comparator.comparingDouble(Employee::getSalary))
-                .orElseThrow(() -> new IllegalArgumentException("Department number is invalid!"));
+                .orElseThrow(() -> new InvalidInputException("Department number is invalid!"));
     }
 
     @Override
@@ -89,7 +84,7 @@ public class MapEmployeeServiceImpl implements EmployeeService {
         return staff.values().stream()
                 .filter(e -> e.getDepartmentId() == departmentId)
                 .max(Comparator.comparingDouble(Employee::getSalary))
-                .orElseThrow(() -> new IllegalArgumentException("Department number is invalid!"));
+                .orElseThrow(() -> new InvalidInputException("Department number is invalid!"));
     }
 
     @Override
@@ -106,7 +101,9 @@ public class MapEmployeeServiceImpl implements EmployeeService {
                 .collect(Collectors.toList());
     }
 
-    private boolean validateInput(String firstName, String lastName) {
-        return StringUtils.isAlpha(firstName) && StringUtils.isAlpha(lastName);
+    private void validateInput(String firstName, String lastName) {
+        if (!StringUtils.isAlpha(firstName) && !StringUtils.isAlpha(lastName)) {
+            throw new InvalidInputException();
+        }
     }
 }
